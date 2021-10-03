@@ -4,25 +4,25 @@ from blockchain.block import Block
 
 
 class Chain:
-    def __init__(self, difficulty):
+    def __init__(self, difficulty: int):
         self.difficulty = difficulty
         self.blocks = []
         self.pool = []
         self.hash = None
         self.__create_origin_block()
 
-    def proof_of_work(self, block):
+    def proof_of_work(self, block: Block):
         self.hash = hashlib.sha256()
         self.hash.update(str(block).encode('utf-8'))
         return block.hash.hexdigest() == self.hash.hexdigest() \
             and int(self.hash.hexdigest(), 16) < 2 ** (256 - self.difficulty) \
             and block.previous_hash == self.blocks[-1].hash
 
-    def add_to_chain(self, block):
+    def add_to_chain(self, block: Block):
         if self.proof_of_work(block):
             self.blocks.append(block)
 
-    def add_data_to_pool(self, data):
+    def add_data_to_pool(self, data: str):
         self.pool.append(data)
 
     def __create_origin_block(self):
@@ -45,7 +45,7 @@ class Chain:
             pretty_print_block(block=block)
 
 
-def pretty_print_block(block):
+def pretty_print_block(block: Block):
     print("\n\n=============================")
     print("Hash:\t\t", block.hash.hexdigest())
     print("Previous Hash:\t\t", block.previous_hash.hexdigest())

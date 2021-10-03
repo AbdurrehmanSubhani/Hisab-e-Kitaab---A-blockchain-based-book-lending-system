@@ -2,13 +2,13 @@ import hashlib
 
 
 class Block:
-    def __init__(self, data, previous_hash):
+    def __init__(self, data: str, previous_hash):
         self.hash = hashlib.sha256()
         self.previous_hash = previous_hash
         self.nonce = 0
         self.data = data
 
-    def mine(self, difficulty):
+    def mine(self, difficulty: int):
         self.hash.update(str(self).encode('utf-8'))
         while int(self.hash.hexdigest(), 16) > 2 ** (256 - difficulty):
             self.nonce += 1

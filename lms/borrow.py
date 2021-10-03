@@ -1,5 +1,8 @@
+from lms.book import Book
+
+
 class Borrow:
-    def __init__(self, book, user):
+    def __init__(self, book: Book, user: str):
         self.book = book
         self.user = user
 
