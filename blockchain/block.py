@@ -2,7 +2,7 @@ import hashlib
 
 
 class Block:
-    def __init__(self, data: str, previous_hash):
+    def __init__(self, data, previous_hash):
         self.hash = hashlib.sha256()
         self.previous_hash = previous_hash
         self.nonce = 0
